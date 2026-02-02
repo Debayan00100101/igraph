@@ -86,4 +86,5 @@ if username.strip():
     except Exception as e:
         st.error("❌ Unable to load profile (private, blocked, or rate-limited).")
 
-st.caption("@created by Debayan Das")
+    st.caption("@created by Debayan Das")
+
