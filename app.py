@@ -4,14 +4,14 @@ import requests
 import base64
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(page_title="iGraph", layout="centered", page_icon="📷")
+st.set_page_config(page_title="Warden", layout="centered", page_icon="📷")
 
 st.markdown(
-    "<h1 style='text-align:center;'>iGraph</h1>",
+    "<h1 style='text-align:center;'>Warden</h1>",
     unsafe_allow_html=True
 )
 
-username = st.text_input("Target username")
+username = st.text_input("")
 
 if username.strip():
     try:
@@ -85,4 +85,5 @@ if username.strip():
 
     except Exception as e:
         st.error("❌ Unable to load profile (private, blocked, or rate-limited).")
+
 st.caption("@created by Debayan Das")
