@@ -13,7 +13,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-username = st.text_input("Enter Instagram username")
+username = st.text_input("")
 
 if username.strip():
     try:
@@ -137,3 +137,4 @@ if username.strip():
         st.error("❌ Unable to load profile (private, blocked, or rate-limited).")
 
     st.caption("@modified to show posts - original by Debayan Das")
+
