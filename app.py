@@ -2,6 +2,8 @@ import streamlit as st
 import instaloader
 import requests
 import base64
+import io
+from PIL import Image
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="Warden", layout="centered", page_icon="📷")
@@ -11,7 +13,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-username = st.text_input("")
+username = st.text_input("Enter Instagram username")
 
 if username.strip():
     try:
@@ -83,8 +85,55 @@ if username.strip():
         if profile.external_url:
             st.markdown(f"**External URL:** {profile.external_url}")
 
+        st.divider()
+
+        # ---------- POSTS SECTION ----------
+        st.subheader("Recent Posts")
+        
+        # Get recent posts (limit to avoid rate limits, adjust as needed)
+        posts = profile.get_posts()
+        post_list = list(posts)[:12]  # Show up to 12 recent posts
+
+        if not post_list:
+            st.warning("No posts available (private account or no posts).")
+        else:
+            posts_container = st.container()
+            
+            # Create columns for grid display (4 columns)
+            cols = st.columns(4)
+            
+            for idx, post in enumerate(post_list):
+                col_idx = idx % 4
+                with cols[col_idx]:
+                    try:
+                        # Get main image/video thumbnail
+                        if post.typename == 'GraphSidecar':
+                            # Carousel post: get first node
+                            node = next(post.get_sidecar_nodes())
+                            media_url = node.display_url if not node.is_video else node.video_url
+                        else:
+                            media_url = post.url if not post.is_video else post.video_url
+                        
+                        # Fetch and display image
+                        response = requests.get(media_url, timeout=10)
+                        img = Image.open(io.BytesIO(response.content))
+                        
+                        # Resize for thumbnail
+                        img.thumbnail((300, 300))
+                        
+                        st.image(img, use_column_width=True)
+                        
+                        # Post caption preview
+                        caption = post.caption or "No caption"
+                        st.caption(caption[:100] + "..." if len(caption) > 100 else caption)
+                        
+                        # Post date
+                        st.caption(f"📅 {post.date.strftime('%Y-%m-%d')}")
+                        
+                    except Exception as post_error:
+                        st.error("Error loading post")
+
     except Exception as e:
         st.error("❌ Unable to load profile (private, blocked, or rate-limited).")
 
-    st.caption("@created by Debayan Das")
-
+    st.caption("@modified to show posts - original by Debayan Das")
