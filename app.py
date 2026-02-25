@@ -29,11 +29,6 @@ if 'L' not in st.session_state:
         st.session_state.logged_in = False
 
 # ---------- LOGIN STATUS ----------
-if st.session_state.logged_in:
-    st.sidebar.success("✅ Auto-logged in!")
-else:
-    st.sidebar.warning("⚠️ Login failed - using anonymous mode")
-
 username = st.text_input("")
 
 if username.strip():
@@ -147,3 +142,4 @@ if username.strip():
         st.error("❌ Unable to load profile.")
 
 st.caption("@secrets integrated - no UI login needed")
+
