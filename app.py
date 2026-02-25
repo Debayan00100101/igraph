@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(page_title="Warden", layout="centered", page_icon="📷")
+st.set_page_config(page_title="Warden", layout="centered", page_icon=r"Screenshot 2026-01-30 190910.png")
 
 st.markdown(
     "<h1 style='text-align:center;'>Warden</h1>",
@@ -145,5 +145,6 @@ if username.strip():
         st.error("❌ Unable to load profile.")
 
 st.caption("@secrets integrated - no UI login needed")
+
 
 
