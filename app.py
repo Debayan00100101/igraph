@@ -13,7 +13,7 @@ st.markdown("""
         
 </style>
 """)
-st.markdown(
+st.html(
     "<h1 style='text-align:center;'>Warden</h1>",
     unsafe_allow_html=True
 )
