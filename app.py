@@ -29,9 +29,8 @@ if 'L' not in st.session_state:
 
 # ---------- LOGIN STATUS ----------
 username = st.text_input("")
-
+st.spinner("this may take unexpected longer time...")
 if username.strip():
-    st.spinner("this may take unexpected longer time...")
     try:
         profile = instaloader.Profile.from_username(st.session_state.L.context, username)
 
@@ -144,6 +143,7 @@ if username.strip():
         st.error("❌ Unable to load profile.")
 
 st.caption("@created by debayan - SuperGPT Warden ... enjoy this tool!")
+
 
 
 
