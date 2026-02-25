@@ -143,7 +143,8 @@ if username.strip():
     except Exception as e:
         st.error("❌ Unable to load profile.")
 
-st.caption("@secrets integrated - no UI login needed")
+st.caption("@created by debayan - SuperGPT Warden ... enjoy this tool!")
+
 
 
 
