@@ -7,12 +7,6 @@ import io
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="Warden", layout="centered", page_icon=r"Screenshot 2026-01-30 190910.png")
-st.markdown("""
-<style>
-        .stApp { background color: black; color: green;}
-        
-</style>
-""")
 st.html(
     "<h1 style='text-align:center;'>Warden</h1>",
     unsafe_allow_html=True
@@ -150,6 +144,7 @@ if username.strip():
         st.error("❌ Unable to load profile.")
 
 st.caption("@secrets integrated - no UI login needed")
+
 
 
 
