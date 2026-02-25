@@ -32,6 +32,7 @@ if 'L' not in st.session_state:
 username = st.text_input("")
 
 if username.strip():
+    st.spinner("this may take unexpected longer time...")
     try:
         profile = instaloader.Profile.from_username(st.session_state.L.context, username)
 
@@ -93,11 +94,13 @@ if username.strip():
         st.markdown(f"**Posts:** {profile.mediacount}")
         st.markdown(f"**Private:** {'🔒 Yes' if profile.is_private else 'No'}")
         st.markdown(f"**Verified:** {'✅ Yes' if profile.is_verified else 'No'}")
+        
 
         if profile.external_url:
             st.markdown(f"**External URL:** {profile.external_url}")
 
         st.divider()
+        st.balloons()
 
         # ---------- POSTS SECTION ----------
         st.subheader("Recent Posts")
@@ -142,4 +145,5 @@ if username.strip():
         st.error("❌ Unable to load profile.")
 
 st.caption("@secrets integrated - no UI login needed")
+
 
